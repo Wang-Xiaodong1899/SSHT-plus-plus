@@ -494,8 +494,8 @@ if __name__ == "__main__":
     parser.add_argument('--layer', type=str, default="wn", choices=["linear", "wn"])
     parser.add_argument('--classifier', type=str, default="bn", choices=["ori", "bn"])
     parser.add_argument('--distance', type=str, default='cosine', choices=["euclidean", "cosine"])  
-    parser.add_argument('--output', type=str, default='origin')
-    parser.add_argument('--output_src', type=str, default='origin')
+    parser.add_argument('--output', type=str, default='/scratch/ssht/')
+    parser.add_argument('--output_src', type=str, default='/scratch/ssht/')
     parser.add_argument('--da', type=str, default='uda', choices=['uda', 'pda'])
     parser.add_argument('--issave', type=bool, default=True)
 

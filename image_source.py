@@ -303,7 +303,7 @@ if __name__ == "__main__":
     parser.add_argument('--layer', type=str, default="wn", choices=["linear", "wn"])
     parser.add_argument('--classifier', type=str, default="bn", choices=["ori", "bn"])
     parser.add_argument('--smooth', type=float, default=0.1)   
-    parser.add_argument('--output', type=str, default='origin')
+    parser.add_argument('--output', type=str, default='/scratch/ssht/')
     parser.add_argument('--da', type=str, default='uda', choices=['ssma','uda', 'pda', 'oda'])
     parser.add_argument('--trte', type=str, default='val', choices=['full', 'val'])
 
