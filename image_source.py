@@ -352,7 +352,12 @@ if __name__ == "__main__":
     args.out_file = open(osp.join(args.output_dir_src, args.net+'_'+'log.txt'), 'w')
     args.out_file.write(print_args(args)+'\n')
     args.out_file.flush()
-    train_source(args)
+    
+    # if checkpoint exist, do not train
+    if osp.exists(osp.join(args.output_dir_src, args.net+'_'+'source_G.pt')):
+        print('Checkpoint existing... Just Evaluation!')
+    else:
+        train_source(args)
 
     args.out_file = open(osp.join(args.output_dir_src, args.net+'_'+'log_test.txt'), 'w')
     for i in range(len(names)):

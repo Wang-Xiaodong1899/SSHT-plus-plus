@@ -2,15 +2,13 @@
 "SSHT" (Semi-supervised Source Hypothesis Transfer.)  
 Paper: [Learning Invariant Representation with Consistency and Diversity for Semi-supervised Source Hypothesis Transfer](https://arxiv.org/abs/2107.03008)
 ![](ssht.png)
-# Environment
-- pytorch=1.2.0
-- torchvision=0.4.0
-- python3.7
-- cuda10
 
 If you use conda, just run the following:
 ```
-conda install pytorch==1.2.0 torchvision==0.4.0 cudatoolkit=10.0
+conda create -n ssht python=3.10
+conda activate ssht
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
+pip install scikit-learn tqdm opencv-python pillow scipy 
 ```
 # Dataset
 Office-31 can be found [here](https://paperswithcode.com/dataset/office-31).    
