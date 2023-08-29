@@ -306,6 +306,7 @@ if __name__ == "__main__":
     parser.add_argument('--output', type=str, default='/home/v-xiaodwang/ssht/')
     parser.add_argument('--da', type=str, default='uda', choices=['ssma','uda', 'pda', 'oda'])
     parser.add_argument('--trte', type=str, default='val', choices=['full', 'val'])
+    parser.add_argument('--overwrite', type=bool, default=False)
 
     parser.add_argument('--T', type=float, default=0.05, metavar='T',
                     help='temperature (default: 0.05)')
@@ -355,7 +356,11 @@ if __name__ == "__main__":
     
     # if checkpoint exist, do not train
     if osp.exists(osp.join(args.output_dir_src, args.net+'_'+'source_G.pt')):
-        print('Checkpoint existing... Just Evaluation!')
+        if args.overwrite:
+            print('Overwrite existing model...')
+            train_source(args)
+        else:
+            print('Checkpoint existing... Just Evaluation!')
     else:
         train_source(args)
 
