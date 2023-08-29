@@ -317,11 +317,11 @@ if __name__ == "__main__":
     if args.dset == 'office-home':
         names = ['Art', 'Clipart', 'Product', 'Real']
         args.class_num = 65 
-        args.root = '/home/wangxiaodong03/dsets/office-home/images'
+        args.root = '/scratch/dsets/office-home/'
     elif args.dset == 'office':
         names = ['amazon', 'dslr', 'webcam']
         args.class_num = 31
-        args.root = '/home/wangxiaodong03/dsets/office/domain_adaptation_images'
+        args.root = '/scratch/dsets/office/'
     elif args.dset == 'DomainNet':
         names = ['clipart', 'painting', 'real','sketch']
         args.class_num = 126
