@@ -37,7 +37,7 @@ class GradReverse(Function):
     def backward(ctx, grad_output):
         input, = ctx.saved_tensors  
         grad_input = grad_output * -1 * ctx.lambd  
-        return grad_input 
+        return grad_input, None
 
 def grad_reverse(x, lambd=1.0):
     return GradReverse.apply(x, lambd)
