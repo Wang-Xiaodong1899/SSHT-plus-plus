@@ -405,7 +405,6 @@ def train_target(args):
             netG.train()
             netB.train()
             netC.train()
-    f.close()
     pbar.close()
     if args.issave:   
         torch.save(netG.state_dict(), osp.join(args.output_dir, "target_G_" + args.savename + ".pt"))
