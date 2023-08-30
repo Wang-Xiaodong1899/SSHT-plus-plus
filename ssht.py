@@ -384,7 +384,8 @@ def train_target(args):
             
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             # print loss:
-            print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
+            if (iter_num-1) > int(args.warm_up*max_iter):
+                print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
             loss_all.backward()
             optimizer_f.step()
             optimizer.step()
