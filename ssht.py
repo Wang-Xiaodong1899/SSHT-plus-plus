@@ -373,8 +373,6 @@ def train_target(args):
         elif args.method == 'CDL-NC':
             loss_t = bnm(netC, feat_u_w, args.lamda)
             loss_t2 = bnm(netC,feat_u_s,args.lamda)
-            loss_t = (loss_t+loss_t2)/2
-            
             # NC loss
             target_t1_ = nn.Softmax(dim=1)(feat_u_w)
             target_t2_ = nn.Softmax(dim=1)(feat_u_s)
@@ -384,7 +382,7 @@ def train_target(args):
             else:
                 smo_loss  = ((target_t1_-target_t2_)**2).mean()
             
-            loss_all = loss + args.trade_off*loss_t + args.lam_nc*smo_loss
+            loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             loss_all.backward()
             optimizer_f.step()
             optimizer.step()
