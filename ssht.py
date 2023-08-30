@@ -377,6 +377,7 @@ def train_target(args):
             target_t1_ = nn.Softmax(dim=1)(feat_u_w)
             target_t2_ = nn.Softmax(dim=1)(feat_u_s)
             
+            print(target_t1_ == target_t2_)
             
             smo_loss  = ((target_t1_-target_t2_)**2).mean()
             print(f'smo_loss: {smo_loss.item():.4f}')
