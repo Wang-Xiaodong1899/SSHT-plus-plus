@@ -19,6 +19,7 @@ from scipy.spatial.distance import cdist
 from sklearn.metrics import confusion_matrix
 
 from randaugment import RandAugmentMC
+torch.autograd.set_detect_anomaly(True)  
 
 from loss import entropy, adentropy
 import torch.nn.functional as F
