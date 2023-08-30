@@ -538,6 +538,7 @@ if __name__ == "__main__":
         if i == args.s:
             continue
         args.t = i
+        print('SSHT task: {} -> {}'.format(names[args.s], names[args.t]))
         folder = './data/txt/'
         args.s_dset_path = folder + args.dset + '/' + 'labeled_source_images_'+names[args.s] + '.txt'
         args.t_dset_path = folder + args.dset + '/' + 'labeled_target_images_'+names[args.t] + '_'+str(args.num)+'.txt'
