@@ -380,7 +380,7 @@ def train_target(args):
             print(target_t1_ == target_t2_)
             
             smo_loss  = ((target_t1_-target_t2_)**2).mean()
-            print(f'smo_loss: {smo_loss.item():.4f}')
+            print(f'smo_loss: {smo_loss.item()}')
             
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             # print loss:
