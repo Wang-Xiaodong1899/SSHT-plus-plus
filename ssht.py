@@ -374,18 +374,15 @@ def train_target(args):
             loss_t = bnm(netC, feat_u_w, args.lamda)
             loss_t2 = bnm(netC,feat_u_s,args.lamda)
             # NC loss
-            target_t1_ = nn.Softmax(dim=1)(feat_u_w)
-            target_t2_ = nn.Softmax(dim=1)(feat_u_s)
-            
-            print(target_t1_ == target_t2_)
+            target_t1_ = nn.Softmax(dim=1)(logits_u_w)
+            target_t2_ = nn.Softmax(dim=1)(logits_u_s)
             
             smo_loss  = ((target_t1_-target_t2_)**2).mean()
-            print(f'smo_loss: {smo_loss.item()}')
             
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             # print loss:
             # if (iter_num-1) > int(args.warm_up*max_iter):
-            # print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
+            print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
             loss_all.backward()
             optimizer_f.step()
             optimizer.step()
