@@ -10,18 +10,37 @@ from torch.autograd import Function
 import math
 import torch.nn.utils.weight_norm as weightNorm
 from collections import OrderedDict
-class GradReverse(Function):
-    def __init__(self, lambd):
-        self.lambd = lambd
 
-    def forward(self, x):
-        return x.view_as(x)
+# old version
+# class GradReverse(Function):
+#     def __init__(self, lambd):
+#         self.lambd = lambd
 
-    def backward(self, grad_output):
-        return (grad_output * -self.lambd)
+#     def forward(self, x):
+#         return x.view_as(x)
+
+#     def backward(self, grad_output):
+#         return (grad_output * -self.lambd)
+    
+# def grad_reverse(x, lambd=1.0):
+#     return GradReverse(lambd)(x)
+
+# new version
+class GradReverse(Function):  
+    @staticmethod  
+    def forward(ctx, input, lambd): 
+        ctx.save_for_backward(input)  
+        ctx.lambd = lambd
+        return input.view_as(input)
+  
+    @staticmethod  
+    def backward(ctx, grad_output):
+        input, = ctx.saved_tensors  
+        grad_input = grad_output * -1 * ctx.lambd  
+        return grad_input 
 
 def grad_reverse(x, lambd=1.0):
-    return GradReverse(lambd)(x)
+    return GradReverse.apply(x, lambd)
 
 
 class Predictor(nn.Module):
