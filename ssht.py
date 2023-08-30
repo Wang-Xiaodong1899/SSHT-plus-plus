@@ -517,9 +517,11 @@ if __name__ == "__main__":
     if args.dset == 'office-home':
         names = ['Art', 'Clipart', 'Product', 'Real']
         args.class_num = 65 
+        args.root = '/scratch/dsets/office-home/'
     if args.dset == 'office':
         names = ['amazon', 'dslr', 'webcam']
         args.class_num = 31
+        args.root = '/scratch/dsets/office/'
     if args.dset == 'VISDA-C':
         names = ['train', 'validation']
         args.class_num = 12
