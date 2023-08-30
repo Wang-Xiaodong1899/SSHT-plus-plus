@@ -377,10 +377,10 @@ def train_target(args):
             target_t1_ = nn.Softmax(dim=1)(feat_u_w)
             target_t2_ = nn.Softmax(dim=1)(feat_u_s)
             
-            if (iter_num-1) <= int(args.warm_up*max_iter):
-                smo_loss = 0.0
-            else:
-                smo_loss  = ((target_t1_-target_t2_)**2).mean()
+            # if (iter_num-1) <= int(args.warm_up*max_iter):
+            #     smo_loss = 0.0
+            # else:
+            smo_loss  = ((target_t1_-target_t2_)**2).mean()
             
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             loss_all.backward()
