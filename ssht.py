@@ -382,7 +382,7 @@ def train_target(args):
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             # print loss:
             # if (iter_num-1) > int(args.warm_up*max_iter):
-            print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
+            # print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
             loss_all.backward()
             optimizer_f.step()
             optimizer.step()
@@ -526,7 +526,7 @@ if __name__ == "__main__":
     parser.add_argument('--mu', default=2, type=int,help='coefficient of unlabeled batch size')
     parser.add_argument('--trade_off', default=1, type=float,help='trade off between Fix and BNM')
     parser.add_argument('--lu', default=2.5, type=float,help='coefficient of unlabeled loss')
-    parser.add_argument('--lam_nc', default=1, type=float,help='trade off for nc loss')
+    parser.add_argument('--lam_nc', default=10, type=float,help='trade off for nc loss')
     parser.add_argument('--warm_up', default=0.2, type=float,help='warm up ratio for nc loss')
 
     args = parser.parse_args()
