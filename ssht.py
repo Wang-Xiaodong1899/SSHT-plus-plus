@@ -377,12 +377,12 @@ def train_target(args):
             target_t1_ = nn.Softmax(dim=1)(logits_u_w)
             target_t2_ = nn.Softmax(dim=1)(logits_u_s)
             
-            smo_loss  = ((target_t1_-target_t2_)**2).mean()
+            smo_loss  = (torch.abs(target_t1_-target_t2_)).mean()
             
             loss_all = loss + args.trade_off*(loss_t+loss_t2)/2 + args.lam_nc*smo_loss
             # print loss:
             # if (iter_num-1) > int(args.warm_up*max_iter):
-            # print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
+            print(f'loss: {loss.item():.4f}, loss_t: {loss_t.item():.4f}, loss_t2: {loss_t2.item():.4f}, smo_loss: {smo_loss.item():.4f}')
             loss_all.backward()
             optimizer_f.step()
             optimizer.step()
