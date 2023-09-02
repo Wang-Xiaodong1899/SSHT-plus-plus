@@ -112,3 +112,16 @@ class CrossEntropyLabelSmooth(nn.Module):
         else:
             return loss
         return loss
+
+def MCC(outputs_target,args):
+    outputs_target_temp = outputs_target / args.mcc_temp
+    target_softmax_out_temp = nn.Softmax(dim=1)(outputs_target_temp)
+    target_entropy_weight = Entropy(target_softmax_out_temp).detach()
+    target_entropy_weight = 1 + torch.exp(-target_entropy_weight)
+    target_entropy_weight = args.batch_size * target_entropy_weight / torch.sum(target_entropy_weight)
+    cov_matrix_t = target_softmax_out_temp.mul(target_entropy_weight.view(-1,1)).transpose(1,0).mm(target_softmax_out_temp)
+    cov_matrix_t = target_softmax_out_temp.transpose(1,0).mm(target_softmax_out_temp)
+
+    cov_matrix_t = cov_matrix_t / torch.sum(cov_matrix_t, dim=1)
+    mcc_loss = (torch.sum(cov_matrix_t) - torch.trace(cov_matrix_t)) / args.class_num
+    return mcc_loss
