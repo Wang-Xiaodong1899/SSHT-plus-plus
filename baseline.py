@@ -538,29 +538,31 @@ if __name__ == "__main__":
     random.seed(SEED)
     # torch.backends.cudnn.deterministic = True
 
-    for i in range(len(names)):
-        if i == args.s:
-            continue
-        args.t = i
-        print('SSHT task: {} -> {}'.format(names[args.s], names[args.t]))
-        folder = './data/txt/'
-        args.s_dset_path = folder + args.dset + '/' + 'labeled_source_images_'+names[args.s] + '.txt'
-        args.t_dset_path = folder + args.dset + '/' + 'labeled_target_images_'+names[args.t] + '_'+str(args.num)+'.txt'
-        args.t_dset_path_unl = folder + args.dset + '/' + 'unlabeled_target_images_'+names[args.t] + '_'+str(args.num)+'.txt'
+    for ss in range(len(names)):
+        args.s = ss
+        for i in range(len(names)):
+            if i == args.s:
+                continue
+            args.t = i
+            print('SSHT task: {} -> {}'.format(names[args.s], names[args.t]))
+            folder = './data/txt/'
+            args.s_dset_path = folder + args.dset + '/' + 'labeled_source_images_'+names[args.s] + '.txt'
+            args.t_dset_path = folder + args.dset + '/' + 'labeled_target_images_'+names[args.t] + '_'+str(args.num)+'.txt'
+            args.t_dset_path_unl = folder + args.dset + '/' + 'unlabeled_target_images_'+names[args.t] + '_'+str(args.num)+'.txt'
 
-        args.output_dir_src = osp.join(args.output_src, args.da, args.dset, names[args.s][0].upper())
-        args.output_dir = osp.join(args.output, args.da, args.dset, names[args.s][0].upper()+names[args.t][0].upper())
-        args.name = names[args.s][0].upper()+names[args.t][0].upper()
+            args.output_dir_src = osp.join(args.output_src, args.da, args.dset, names[args.s][0].upper())
+            args.output_dir = osp.join(args.output, args.da, args.dset, names[args.s][0].upper()+names[args.t][0].upper())
+            args.name = names[args.s][0].upper()+names[args.t][0].upper()
 
-        if not osp.exists(args.output_dir):
-            os.system('mkdir -p ' + args.output_dir)
-        if not osp.exists(args.output_dir):
-            os.mkdir(args.output_dir)
+            if not osp.exists(args.output_dir):
+                os.system('mkdir -p ' + args.output_dir)
+            if not osp.exists(args.output_dir):
+                os.mkdir(args.output_dir)
 
-        ###add
-        args.savename = args.method+'_'+args.net
-        args.out_file = open(osp.join(args.output_dir, 'log_' + args.savename + '.txt'), 'w')
-        args.out_file.write(print_args(args)+'\n')
-        args.out_file.flush()
-        train_target(args)
-        # break
+            ###add
+            args.savename = args.method+'_'+args.net
+            args.out_file = open(osp.join(args.output_dir, 'log_' + args.savename + '.txt'), 'w')
+            args.out_file.write(print_args(args)+'\n')
+            args.out_file.flush()
+            train_target(args)
+            # break
