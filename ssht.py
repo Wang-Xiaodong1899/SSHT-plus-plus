@@ -513,7 +513,7 @@ if __name__ == "__main__":
     parser.add_argument('--output', type=str, default='/home/v-xiaodwang/ssht/')
     parser.add_argument('--output_src', type=str, default='/home/v-xiaodwang/ssht/')
     parser.add_argument('--da', type=str, default='uda', choices=['uda', 'pda'])
-    parser.add_argument('--issave', type=bool, default=True)
+    parser.add_argument('--issave', type=bool, default=False)
 
     parser.add_argument('--num', type=int, default=3,help='number of labeled examples in the target')
     parser.add_argument('--alpha', default=0.75, type=float)
