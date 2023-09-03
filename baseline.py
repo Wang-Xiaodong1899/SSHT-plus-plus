@@ -330,7 +330,7 @@ def train_target(args):
             loss.backward() # only little supervised loss
             optimizer_f.step()
             optimizer.step()
-        elif 'Fix' in args.method:
+        elif args.method == 'FixMatch':
             # FixMatch loss # Lx + Lu
             pseudo_label = torch.softmax(logits_u_w.detach(), dim=-1)
             max_probs, targets_u = torch.max(pseudo_label, dim=-1)
