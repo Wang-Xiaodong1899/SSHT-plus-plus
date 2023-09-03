@@ -516,6 +516,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(args.net)
+    print(f'Method: {args.method}')
     print('---------------------------------------------------------')
     if args.dset == 'office-home':
         names = ['Art', 'Clipart', 'Product', 'Real']
